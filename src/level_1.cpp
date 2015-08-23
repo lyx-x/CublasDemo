@@ -1,13 +1,13 @@
 #include "level_1.h"
 
 void vectorAbsMinMax() {
-	printf("---- Demo abs min-max element in a vector ----\n");
+	printf("---- Demo ans := min|max(|x[i]|) ----\n");
 	const int n = 6;
 	cudaError_t cudaStat;
 	cublasStatus_t stat;
 	cublasHandle_t handle;
 	float* x = new float[n];
-	generateVector(x, n, 0, 100);
+	generateVector(x, n);
 	printVector(x, n, "x");
 	float* d_x;
 	cudaStat = cudaMalloc((void**)&d_x, n * sizeof(*x));
@@ -25,13 +25,13 @@ void vectorAbsMinMax() {
 }
 
 void vectorAbsSum() {
-	printf("---- Demo abs sum of a vector ---\n");
+	printf("---- Demo ans := sum(|x[i]|) ----\n");
 	const int n = 6;
 	cudaError_t cudaStat;
 	cublasStatus_t stat;
 	cublasHandle_t handle;
 	float* x = new float[n];
-	generateVector(x, n, 0, 100);
+	generateVector(x, n);
 	printVector(x, n, "x");
 	float* d_x;
 	cudaStat = cudaMalloc((void**)&d_x, n * sizeof(x));
@@ -47,7 +47,7 @@ void vectorAbsSum() {
 }
 
 void vectorScalar() {
-	printf("---- Demo a * x + y ---\n");
+	printf("---- Demo ans := a * x + y ---\n");
 	const int n = 6;
 	cudaError_t cudaStat;
 	cublasStatus_t stat;
@@ -55,7 +55,7 @@ void vectorScalar() {
 	float a = 2.0;
 	printf("a:\t%.2f\n", a);
 	float *x = new float[n];
-	generateVector(x, n, 0, 100);
+	generateVector(x, n);
 	printVector(x, n, "x");
 	float *y = new float[n];
 	generateVector(y, n, -10, 10);
@@ -70,6 +70,32 @@ void vectorScalar() {
 	stat = cublasSaxpy(handle, n, &a, d_x, 1, d_y, 1);
 	stat = cublasGetVector(n, sizeof(*y), d_y, 1, y, 1);
 	printVector(y, n, "ans");
+	cudaFree(d_x);
+	cudaFree(d_y);
+	cublasDestroy(handle);
+	delete[] x;
+	delete[] y;
+}
+
+void vectorCopyOnDevice() {
+	printf("---- Demo y := x on device ---\n");
+	cudaError_t cudaStat;
+	cublasStatus_t stat;
+	cublasHandle_t handle;
+	const int n = 6;
+	float *x = new float[n];
+	float *y = new float[n];
+	generateVector(x, n);
+	printVector(x, n, "x");
+	float *d_x;
+	cudaStat = cudaMalloc((void**)&d_x, n * sizeof(*x));
+	float *d_y;
+	cudaStat = cudaMalloc((void**)&d_y, n * sizeof(*y));
+	stat = cublasCreate(&handle);
+	stat = cublasSetVector(n, sizeof(*x), x, 1, d_x, 1);
+	stat = cublasScopy(handle, n, d_x, 1, d_y, 1);
+	stat = cublasGetVector(n, sizeof(*y), d_y, 1, y, 1);
+	printVector(y, n, "y");
 	cudaFree(d_x);
 	cudaFree(d_y);
 	cublasDestroy(handle);

@@ -12,3 +12,5 @@ void vectorAbsSum();
 // Calculate a * x + y
 void vectorScalar();
 
+// Copy the vector x to y
+void vectorCopyOnDevice();
