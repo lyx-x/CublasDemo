@@ -14,3 +14,6 @@ void vectorScalar();
 
 // Copy the vector x to y
 void vectorCopyOnDevice();
+
+// Calculate the scalar product between two vectors
+void vectorDotProduct();

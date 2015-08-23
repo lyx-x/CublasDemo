@@ -47,7 +47,7 @@ void vectorAbsSum() {
 }
 
 void vectorScalar() {
-	printf("---- Demo ans := a * x + y ---\n");
+	printf("---- Demo ans := a * x + y ----\n");
 	const int n = 6;
 	cudaError_t cudaStat;
 	cublasStatus_t stat;
@@ -78,7 +78,7 @@ void vectorScalar() {
 }
 
 void vectorCopyOnDevice() {
-	printf("---- Demo y := x on device ---\n");
+	printf("---- Demo y := x on device ----\n");
 	cudaError_t cudaStat;
 	cublasStatus_t stat;
 	cublasHandle_t handle;
@@ -101,4 +101,9 @@ void vectorCopyOnDevice() {
 	cublasDestroy(handle);
 	delete[] x;
 	delete[] y;
+}
+
+void vectorDotProduct() {
+	printf("---- Demo ans := x .* y ----\n");
+
 }
