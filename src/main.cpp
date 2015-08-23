@@ -1,10 +1,10 @@
 /*
  ============================================================================
- Name        : LATest.cu
+ Name        : LATest.cpp
  Author      : lyx
  Version     :
  Copyright   : 
- Description : CUDA compute reciprocals
+ Description : CuBLAS Demo
  ============================================================================
  */
 
@@ -13,5 +13,6 @@
 int main(void) {
 	vectorAbsMinMax();
 	vectorAbsSum();
+	vectorScalar();
 	return EXIT_SUCCESS;
 }

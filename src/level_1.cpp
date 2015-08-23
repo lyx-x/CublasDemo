@@ -48,4 +48,31 @@ void vectorAbsSum() {
 
 void vectorScalar() {
 	printf("---- Demo a * x + y ---\n");
+	const int n = 6;
+	cudaError_t cudaStat;
+	cublasStatus_t stat;
+	cublasHandle_t handle;
+	float a = 2.0;
+	printf("a:\t%.2f\n", a);
+	float *x = new float[n];
+	generateVector(x, n, 0, 100);
+	printVector(x, n, "x");
+	float *y = new float[n];
+	generateVector(y, n, -10, 10);
+	printVector(y, n, "y");
+	float *d_x;
+	float *d_y;
+	cudaStat = cudaMalloc((void**)&d_x, n * sizeof(x));
+	cudaStat = cudaMalloc((void**)&d_y, n * sizeof(y));
+	stat = cublasCreate(&handle);
+	stat = cublasSetVector(n, sizeof(*x), x, 1, d_x, 1);
+	stat = cublasSetVector(n, sizeof(*y), y, 1, d_y, 1);
+	stat = cublasSaxpy(handle, n, &a, d_x, 1, d_y, 1);
+	stat = cublasGetVector(n, sizeof(*y), d_y, 1, y, 1);
+	printVector(y, n, "ans");
+	cudaFree(d_x);
+	cudaFree(d_y);
+	cublasDestroy(handle);
+	delete[] x;
+	delete[] y;
 }
