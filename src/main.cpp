@@ -17,6 +17,10 @@ int main(void) {
 	vectorAbsMinMax();
 	vectorAbsSum();
 	vectorScalar();
+	vectorScalarPlus();
 	vectorCopyOnDevice();
+	vectorDotProduct();
+	vectorNorm();
+	vectorSwap();
 	return EXIT_SUCCESS;
 }

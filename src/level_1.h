@@ -9,11 +9,20 @@ void vectorAbsMinMax();
 // Sum up elements of a vector
 void vectorAbsSum();
 
-// Calculate a * x + y
+// Calculate a * x
 void vectorScalar();
+
+// Calculate a * x + y
+void vectorScalarPlus();
 
 // Copy the vector x to y
 void vectorCopyOnDevice();
 
 // Calculate the scalar product between two vectors
 void vectorDotProduct();
+
+// Return the Euclidean norm of the vector
+void vectorNorm();
+
+// Swap two vectors
+void vectorSwap();
