@@ -1,4 +1,4 @@
-#include "level_1.cuh"
+#include "level_1.h"
 
 void vectorAbsMinMax() {
 	printf("---- Demo abs min-max element in a vector ----\n");

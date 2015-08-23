@@ -8,7 +8,7 @@
  ============================================================================
  */
 
-#include "level_1.cuh"
+#include "level_1.h"
 
 int main(void) {
 	vectorAbsMinMax();
