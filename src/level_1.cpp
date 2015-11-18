@@ -34,7 +34,7 @@ void vectorAbsSum() {
 	generateVector(x, n);
 	printVector(x, n, "x");
 	float* d_x;
-	cudaStat = cudaMalloc((void**)&d_x, n * sizeof(x));
+	cudaStat = cudaMalloc((void**)&d_x, n * sizeof(*x));
 	stat = cublasCreate(&handle);
 	// Copy vector to device
 	stat = cublasSetVector(n, sizeof(*x), x, 1, d_x, 1);
@@ -58,7 +58,7 @@ void vectorScalar() {
 	generateVector(x, n);
 	printVector(x, n, "x");
 	float *d_x;
-	cudaStat = cudaMalloc((void**)&d_x, n * sizeof(x));
+	cudaStat = cudaMalloc((void**)&d_x, n * sizeof(*x));
 	stat = cublasCreate(&handle);
 	stat = cublasSetVector(n, sizeof(*x), x, 1, d_x, 1);
 	stat = cublasSscal(handle, n, &a, d_x, 1);
@@ -85,8 +85,8 @@ void vectorScalarPlus() {
 	printVector(y, n, "y");
 	float *d_x;
 	float *d_y;
-	cudaStat = cudaMalloc((void**)&d_x, n * sizeof(x));
-	cudaStat = cudaMalloc((void**)&d_y, n * sizeof(y));
+	cudaStat = cudaMalloc((void**)&d_x, n * sizeof(*x));
+	cudaStat = cudaMalloc((void**)&d_y, n * sizeof(*y));
 	stat = cublasCreate(&handle);
 	stat = cublasSetVector(n, sizeof(*x), x, 1, d_x, 1);
 	stat = cublasSetVector(n, sizeof(*y), y, 1, d_y, 1);

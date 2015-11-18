@@ -1,3 +1,6 @@
+#ifndef LEVEL_1
+#define LEVEL_1
+
 #include <cstdio>
 #include "cuda_runtime.h"
 #include "cublas_v2.h"
@@ -26,3 +29,5 @@ void vectorNorm();
 
 // Swap two vectors
 void vectorSwap();
+
+#endif
